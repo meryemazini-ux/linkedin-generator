@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600&family=Dancing+Script:wght@700&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { margin: 0; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; }
+    a { color: #f5c518; } a:hover { color: #fff; }
+
+    .wrap {
+      width: 1280px;
+      min-height: 900px;
+      background:
+        repeating-conic-gradient(#0b3e9e 0% 25%, #1968d8 0% 50%) 0 0 / 54px 54px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* ── PATRONAGE ── */
+    .patronage {
+      width: 100%;
+      background: rgba(255,255,255,0.09);
+      border-bottom: 2px solid rgba(255,255,255,0.22);
+      text-align: center;
+      padding: 14px 40px 12px;
+    }
+    .arabic {
+      direction: rtl; font-size: 17px; font-weight: 700;
+      margin-bottom: 5px; line-height: 1.55;
+    }
+    .pat-fr {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; margin-bottom: 3px;
+    }
+    .pat-en {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase; opacity: 0.88;
+    }
+
+    /* ── LOGOS ROW ── */
+    .logos {
+      width: 100%;
+      background: rgba(0,0,0,0.18);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 32px;
+      flex-wrap: wrap;
+    }
+    .logo-circle {
+      width: 62px; height: 62px; border-radius: 50%;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      padding: 5px; text-align: center;
+      font-size: 7.5px; font-weight: 800; color: #c8102e; line-height: 1.3;
+      flex-shrink: 0;
+    }
+    .logo-badge {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 4px;
+      width: 85px; text-align: center;
+    }
+    .flag {
+      width: 36px; height: 22px; background: #c1272d;
+      border-radius: 2px; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .flag-star { color: #006233; font-size: 13px; font-weight: 900; }
+    .logo-txt { font-size: 6.5px; color: #bbd; line-height: 1.35; font-weight: 500; }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      width: 100%; max-width: 1200px;
+      padding: 24px 40px 30px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 20px;
+    }
+
+    /* event logo row */
+    .event-row {
+      display: flex; align-items: center;
+      justify-content: center; gap: 30px;
+      width: 100%; flex-wrap: wrap;
+    }
+    .logo-stack {
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 8px;
+    }
+    .event-logo {
+      display: flex; align-items: flex-end;
+      line-height: 1; position: relative;
+      padding-bottom: 22px;
+    }
+    .n3    { font-size: 88px; font-weight: 900; line-height: 0.9; }
+    .seme  { font-size: 19px; font-weight: 700; vertical-align: super; }
+    .globe-wrap {
+      display: flex; align-items: center;
+      background: radial-gradient(circle, #2eaaf1 0%, #0077b5 60%, #004f80 100%);
+      border-radius: 50%; width: 72px; height: 72px;
+      margin: 0 -2px; flex-shrink: 0;
+      overflow: hidden; position: relative; bottom: 6px;
+    }
+    .globe-svg { width: 100%; height: 100%; }
+    .gi    { font-size: 80px; font-weight: 900; line-height: 0.9; }
+    .terre { font-size: 80px; font-weight: 900; line-height: 0.9; }
+    .edition {
+      position: absolute; bottom: 0; right: 6px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px; font-weight: 700; color: #f5c518;
+    }
+    .forum-sub p {
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 2px; line-height: 1.7;
+    }
+
+    /* date badge */
+    .date-badge {
+      border: 3px solid #fff; border-radius: 4px;
+      display: flex; align-items: stretch; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .d-left  { padding: 12px 18px; text-align: center; }
+    .d-day   { font-size: 26px; font-weight: 900; display: block; }
+    .d-month { font-size: 13px; font-weight: 700; }
+    .d-sep   { width: 3px; background: #fff; }
+    .d-right {
+      padding: 12px 18px; text-align: center;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .d-city  { font-size: 16px; font-weight: 900; display: block; }
+    .d-venue { font-size: 8px; font-weight: 500; letter-spacing: 0.3px; opacity: 0.9; }
+
+    /* photo area */
+    .photo {
+      width: 100%; max-width: 700px; height: 185px;
+      background: linear-gradient(160deg, rgba(5,25,70,0.7) 0%, rgba(10,60,140,0.5) 100%);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    .photo-inner {
+      display: flex; gap: 40px; align-items: center;
+    }
+    .seat {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .table-top {
+      width: 90px; height: 55px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 8px;
+    }
+
+    /* LinkedIn section */
+    .li-wrap { text-align: center; line-height: 1.05; }
+    .li-row {
+      display: flex; align-items: center;
+      justify-content: center; gap: 8px; flex-wrap: wrap;
+    }
+    .li-word  { font-size: 68px; font-weight: 900; }
+    .li-badge {
+      font-size: 50px; font-weight: 900;
+      background: #0077B5; color: #fff;
+      border-radius: 10px; padding: 0 13px;
+      line-height: 1.22;
+    }
+    .morocco  { font-size: 74px; font-weight: 900; letter-spacing: 10px; margin-top: 0; }
+
+    /* subtitle */
+    .sub { text-align: center; }
+    .sub-main { font-size: 21px; font-weight: 700; margin-bottom: 4px; }
+    .sub-dsp  { font-size: 15px; font-style: italic; opacity: 0.85; }
+
+    /* buttons */
+    .btn-row {
+      display: flex; gap: 18px;
+      flex-wrap: wrap; justify-content: center;
+      padding-bottom: 10px;
+    }
+    .btn {
+      background: transparent;
+      border: 2px solid #fff; color: #fff;
+      border-radius: 28px;
+      padding: 12px 30px;
+      font-size: 13.5px; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.4px;
+      font-family: 'Montserrat', inherit;
+      transition: background 0.18s, color 0.18s;
+    }
+    .btn:hover { background: #fff; color: #0b3e9e; }
+    .btn:active { transform: scale(0.96); }
+
+    /* toast */
+    .toast {
+      position: fixed; bottom: 36px;
+      left: 50%; transform: translateX(-50%);
+      background: rgba(0,100,180,0.97);
+      color: #fff; padding: 14px 32px;
+      border-radius: 8px; font-weight: 600;
+      font-size: 14px; white-space: nowrap;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+  </style>
+</helmet>
+
+<div class="wrap">
+
+  <!-- PATRONAGE -->
+  <div class="patronage">
+    <p class="arabic">تحت الرعاية السامية لصاحب الجلالة الملك محمد السادس نصره الله</p>
+    <p class="pat-fr">SOUS LE HAUT PATRONAGE DE SA MAJESTÉ LE ROI MOHAMMED VI, QUE DIEU L'ASSISTE</p>
+    <p class="pat-en">UNDER THE HIGH PATRONAGE OF HIS MAJESTY KING MOHAMMED VI MAY GOD ASSIST HIM</p>
+  </div>
+
+  <!-- LOGOS -->
+  <div class="logos">
+    <div class="logo-circle">RÉGION<br>CASABLANCA<br>SETTAT</div>
+    <div class="logo-badge">
+      <div class="flag"><span class="flag-star">★</span></div>
+      <div class="logo-txt">MINISTÈRE DE LA TRANSITION ÉNERGÉTIQUE ET DU DÉVELOPPEMENT DURABLE</div>
+    </div>
+    <div class="logo-badge">
+      <div class="flag"><span class="flag-star">★</span></div>
+      <div class="logo-txt">وزارة الإنتقال الطاقي و التنمية المستدامة</div>
+    </div>
+    <div class="logo-badge">
+      <div class="flag"><span class="flag-star">★</span></div>
+      <div class="logo-txt">MINISTÈRE DU TRANSPORT ET DE LA LOGISTIQUE</div>
+    </div>
+    <div class="logo-badge">
+      <div class="flag"><span class="flag-star">★</span></div>
+      <div class="logo-txt">وزارة النقل و اللوجستيك</div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- EVENT LOGO + DATE BADGE -->
+    <div class="event-row">
+      <div class="logo-stack">
+        <div class="event-logo">
+          <span class="n3">3</span><span class="seme">ème</span>
+          <div class="globe-wrap">
+            <svg class="globe-svg" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="36" cy="36" r="36" fill="#1a8dd4"/>
+              <ellipse cx="36" cy="36" rx="16" ry="36" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+              <ellipse cx="36" cy="36" rx="36" ry="16" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+              <line x1="0" y1="36" x2="72" y2="36" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+              <line x1="36" y1="0" x2="36" y2="72" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+              <path d="M12 22 Q28 18 36 22 Q46 26 60 20" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+              <path d="M8 42 Q24 38 36 44 Q50 50 64 42" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="gi">gi</span><span class="terre">Terre</span>
+          <span class="edition">Édition</span>
+        </div>
+        <div class="forum-sub">
+          <p>FORUM-SALON INTERNATIONAL</p>
+          <p>MOBILITÉ-TRANSPORT-LOGISTIQUE</p>
+        </div>
+      </div>
+
+      <div class="date-badge">
+        <div class="d-left">
+          <span class="d-day">20 AU 22</span>
+          <span class="d-month">OCTOBRE 2026</span>
+        </div>
+        <div class="d-sep"></div>
+        <div class="d-right">
+          <span class="d-city">CASABLANCA</span>
+          <span class="d-venue">FOIRE INTERNATIONALE - AMDIE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO -->
+    <div class="photo">
+      <div class="photo-inner">
+        <div class="seat">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="rgba(255,255,255,0.55)">
+            <circle cx="12" cy="7" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="none"/>
+          </svg>
+        </div>
+        <div class="table-top"></div>
+        <div class="seat">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="rgba(255,255,255,0.55)">
+            <circle cx="12" cy="7" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+        <div class="seat">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="rgba(255,255,255,0.55)">
+            <circle cx="12" cy="7" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINKEDIN LOCAL MOROCCO -->
+    <div class="li-wrap">
+      <div class="li-row">
+        <span class="li-word">Linked</span>
+        <span class="li-badge">in</span>
+        <span class="li-word">&nbsp;Local</span>
+      </div>
+      <div class="morocco">MOROCCO</div>
+    </div>
+
+    <!-- SUBTITLE -->
+    <div class="sub">
+      <p class="sub-main">Recrutement, Networking et Masterclass</p>
+      <p class="sub-dsp">- Le Dispositif Complet -</p>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="btn-row">
+      <button class="btn" onClick="{{ onRecrutement }}">Recrutement Plug &amp; Match</button>
+      <button class="btn" onClick="{{ onReseautage }}">Réseautage B2B</button>
+      <button class="btn" onClick="{{ onMasterclass }}">Académie Masterclass</button>
+    </div>
+
+  </div>
+
+  <!-- TOAST -->
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div class="toast">{{ toast }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { toast: '', timer: null };
+  }
+  showToast(msg) {
+    if (this.state.timer) clearTimeout(this.state.timer);
+    const t = setTimeout(() => this.setState({ toast: '', timer: null }), 3200);
+    this.setState({ toast: msg, timer: t });
+  }
+  renderVals() {
+    return {
+      toast: this.state.toast,
+      hasToast: !!this.state.toast,
+      onRecrutement: () => this.showToast('✓  Recrutement Plug & Match — Inscription confirmée !'),
+      onReseautage:  () => this.showToast('✓  Réseautage B2B — Inscription confirmée !'),
+      onMasterclass: () => this.showToast('✓  Académie Masterclass — Inscription confirmée !'),
+    };
+  }
+}
+</script>
+</body>
+</html>
